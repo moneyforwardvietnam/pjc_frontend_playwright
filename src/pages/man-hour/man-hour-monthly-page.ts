@@ -1,5 +1,5 @@
 import { PageCommon } from '@pages/page-common'
-import { Locator, Page } from '@playwright/test'
+import { Page } from '@playwright/test'
 
 export class ManHourMonthlyPage extends PageCommon {
   private readonly manHourUrl: string

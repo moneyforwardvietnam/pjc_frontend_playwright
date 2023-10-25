@@ -17,7 +17,6 @@ export class LoginPage extends PageCommon {
   }
 
   async goto() {
-    console.log('this.loginUrl: ', this.loginUrl)
     await this.page.goto(this.loginUrl)
   }
 
