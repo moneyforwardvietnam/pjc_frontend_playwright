@@ -23,6 +23,10 @@ export class LoginPage extends PageCommon {
   async login(email: string, password: string) {
     await this.goto()
     await this.clickLocatorByTestId('login-button')
+    const availableAccountButton = await this.page.getByText('Use other accounts')
+    if ((await availableAccountButton.count()) > 0) {
+      await availableAccountButton.click()
+    }
     await this.emailInput.click()
     await this.emailInput.fill(email)
     await this.signInButton.click()

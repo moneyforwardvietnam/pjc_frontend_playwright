@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test'
 import { envConfig } from '@utils/envConfig'
 import { loginFlow } from '../../src/flows/login'
 
-test('C24886 Login again after logging out', async ({ page }) => {
+test('C24036 Login again after logging out', async ({ page }) => {
   await loginFlow(page, accounts.DEFAULT)
   await expect(page.url()).toBe(`${envConfig.baseUrl}`)
   await page.getByTestId('office-user-name-button').click()

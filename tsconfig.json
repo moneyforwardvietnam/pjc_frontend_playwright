@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "paths": {
       "@e2e/*": ["e2e/*"],
       "@data/*": ["data/*"],

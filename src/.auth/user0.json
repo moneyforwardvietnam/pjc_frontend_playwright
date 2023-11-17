@@ -1,0 +1,199 @@
+{
+  "cookies": [
+    {
+      "name": "pjc_jwt_refresh",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwMUhGREdFQ0tXNlhBWjA1TThaR0dZQlM3QSIsInVzZXJfaWQiOiIwMUdFRU5QVkRDMlBWWTEyUUFEU0hOWFc4RSIsIm9mZmljZV9pZCI6IjAxR1JRWEZFN05RVjZQMlJDNVpXNjVOTTU0IiwiZXhwIjoxNzAwMjczMTYzLCJpYXQiOjE3MDAxODY3NjN9.CxuzNKClsHi0p3FpVF5dWvPK33YeRExIBH_WBmiqKpk",
+      "domain": "project-cost.mfvn.dev",
+      "path": "/api/v1/sessions/refresh",
+      "expires": 1700273163.838856,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "pjc_jwt_access",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwMUhGREdFQ0tXNlhBWjA1TThaR0dZQlM3QSIsInVzZXJfaWQiOiIwMUdFRU5QVkRDMlBWWTEyUUFEU0hOWFc4RSIsIm9mZmljZV9pZCI6IjAxR1JRWEZFN05RVjZQMlJDNVpXNjVOTTU0IiwiZXhwIjoxNzAwMjI5OTYzLCJpYXQiOjE3MDAxODY3NjN9.iDFadSZLZvC21LEf3fmtXb-G7LnZgCY7wmU0eOpRW4w",
+      "domain": "project-cost.mfvn.dev",
+      "path": "/api",
+      "expires": 1700273163.838804,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "icma",
+      "value": "true",
+      "domain": "id.test.mfw.work",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga",
+      "value": "GA1.2.126970976.1700186744",
+      "domain": ".mfw.work",
+      "path": "/",
+      "expires": 1734746756.823022,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_gid",
+      "value": "GA1.2.1960097306.1700186744",
+      "domain": ".mfw.work",
+      "path": "/",
+      "expires": 1700273156,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_gat_UA-153534803-3",
+      "value": "1",
+      "domain": ".mfw.work",
+      "path": "/",
+      "expires": 1700186803,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "mfid",
+      "value": "true",
+      "domain": ".test.mfw.work",
+      "path": "/",
+      "expires": 1702778758.251532,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "logged_in",
+      "value": "true",
+      "domain": "project-cost.mfvn.dev",
+      "path": "/",
+      "expires": 1700273163,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "accept_term",
+      "value": "true",
+      "domain": "project-cost.mfvn.dev",
+      "path": "/",
+      "expires": 1700273163,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "has_available_tenant",
+      "value": "true",
+      "domain": "project-cost.mfvn.dev",
+      "path": "/",
+      "expires": 1700273163,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "has_available_office",
+      "value": "true",
+      "domain": "project-cost.mfvn.dev",
+      "path": "/",
+      "expires": 1700273163,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "has_active_office",
+      "value": "true",
+      "domain": "project-cost.mfvn.dev",
+      "path": "/",
+      "expires": 1700273163,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "agent_login",
+      "value": "false",
+      "domain": "project-cost.mfvn.dev",
+      "path": "/",
+      "expires": 1700273163,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "last_used_application",
+      "value": "RxXYcwh6Q4iO6GD0GRCzs6PbCG%2BETXYrNK%2B%2F25KXGF8mk8NFseo4loEoKSvxiykDo980HMZCuzC7wLQ%2Ba5jGQ0YhzkO%2BOBmZ9cpocfG%2BJSLZD7SAQzjgd9sj4NdW4%2F7oXYBJVoqDStDIshTQCxrgfsI3KdYfSMpzKuCTz5ZwM11umZdG4g%3D%3D--keTSqbblDusZaGav--UR8MFPmqjYasAg6zuaardQ%3D%3D",
+      "domain": "id.test.mfw.work",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "sih",
+      "value": "NUHlBjPvqc9KbVIsHYkb3lO3uJZWY1Ytvi8bY21DGq0HnbRiI%2BZJ8etW9uLdzwQkM1pXv2RY0dKXqXlOqM42biX92CFKXs2AyPeLVvq0Me29yR3sZ2BFwix9cDbfd4BVtadu%2BNmm8oz%2Fr%2BftONTKU5Bc%2FLqGhpdJxoCk2PdDT6QBHDmCNGMjS3osjgn14B8kZfMN09EDcIzGh15x4Lwis%2FpShEkKN4URZuLKQUQKW1KsGoeEsMagyc7EsfZBRa0crLyQSgTUuXlmeqV4ktpOOg%2BqpETNJvRReT1wJYIgX6zQQcHUICY7eI3UpTfMxNPJYuS8Mlw13xzS2OVOW8XMXRK7sgnAzGkctsdqYr%2FHoBVXEuUX3UtmHTp6D6niMtluxXu%2FLWx2qiyHzWxrCfBLuH9%2FK6o9E84ZDic3amfXBv4FB4xaEa%2FMWuGh%2FVALlPI5ZYdBzh2Kr0NpqbpYgzJuNN3lpUjw7rK5TFMRideCh%2Bn3WryKCAFo2CVQeDUrV%2BDVSgoUNyq8ZFED%2B6K7y2buX8m8NOS4ju0l%2BuW98YQ%3D--KcrB7pS787etmR5X--PglFgRZVis9eUPsCilHT2g%3D%3D",
+      "domain": "id.test.mfw.work",
+      "path": "/",
+      "expires": 1731809158.251366,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_mfid_session",
+      "value": "7831166e933b9de2cf506855a0c177c2",
+      "domain": "id.test.mfw.work",
+      "path": "/",
+      "expires": 1702778759.942133,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "office_user_id",
+      "value": "01GV0KDH2WKWGMV7VQK5DSM0EN",
+      "domain": "project-cost.mfvn.dev",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "permissions",
+      "value": "eyIxIjpbIlJFQUQiXSwiMiI6WyJSRUFEIl0sIjMiOlsiUkVBRCJdLCI0IjpbIlJFQUQiXSwiNSI6WyJSRUFEIl0sIjYiOlsiUkVBRCJdLCI3IjpbIlJFQUQiXSwiOCI6WyJSRUFEIl0sIjkiOlsiUkVBRCJdLCIxMCI6WyJSRUFEIl0sIjExIjpbIlJFQUQiXSwiMTIiOlsiUkVBRCJdLCIxMyI6WyJSRUFEIl0sIjE0IjpbIlJFQUQiXX0=",
+      "domain": "project-cost.mfvn.dev",
+      "path": "/",
+      "expires": 1700273163,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://project-cost.mfvn.dev",
+      "localStorage": [
+        {
+          "name": "csrfToken",
+          "value": "b2ada002a800b0ce6b4523bd60cafbff70259ae0041f842b8f606b7dac6313aa"
+        },
+        {
+          "name": "nonce",
+          "value": "3179419626"
+        }
+      ]
+    }
+  ]
+}
