@@ -20,6 +20,7 @@
     "swagger-typescript-api": "^13.0.2"
   },
   "scripts": {
+    "preinstall": "npx playwright install",
     "test": "npx playwright test",
     "test:ui": "npx playwright test --ui",
     "report": "npx playwright show-report",
