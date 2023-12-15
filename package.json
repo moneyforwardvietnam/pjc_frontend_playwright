@@ -5,6 +5,13 @@
   "repository": "https://github.com/moneyforwardvietnam/pjc_frontend_playwright.git",
   "author": "Nautilus <vu.duc.chinh@moneyforward.vn>",
   "license": "MIT",
+  "scripts": {
+    "preinstall": "npx playwright install",
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test --ui",
+    "report": "npx playwright show-report",
+    "codegen": "npx playwright codegen https://project-cost.mfvn.dev/login"
+  },
   "devDependencies": {
     "@playwright/test": "^1.39.0",
     "@types/node": "^20.8.7",
@@ -18,12 +25,5 @@
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.8",
     "swagger-typescript-api": "^13.0.2"
-  },
-  "scripts": {
-    "preinstall": "npx playwright install",
-    "test": "npx playwright test",
-    "test:ui": "npx playwright test --ui",
-    "report": "npx playwright show-report",
-    "codegen": "npx playwright codegen https://project-cost.mfvn.dev/login"
   }
 }
