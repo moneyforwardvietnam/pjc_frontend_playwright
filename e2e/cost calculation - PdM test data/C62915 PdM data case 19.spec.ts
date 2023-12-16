@@ -13,7 +13,7 @@ test('C62915 PdM data case 19', async ({ page }) => {
   ]
   await loginFlow(page, accounts.WILLIAM_6)
   const switchOfficePage = new SwitchOfficePage(page)
-  await switchOfficePage.switchOfficeByOfficeId('')
+  await switchOfficePage.switchOfficeByOfficeId('01GHZJKJGPKMZ5Z38K0Y34J89N')
   const costPage = new CostCalculationPage(page, '?valid_at=2022-11&tab=result')
   await costPage.goto()
   const tableResult = await costPage.getCostResultData()
