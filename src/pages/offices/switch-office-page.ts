@@ -1,8 +1,6 @@
-import { expect } from "@fixtures/fixture";
-import { PageCommon } from '@pages/page-common'
-import { Page, test } from '@playwright/test'
-import { envConfig } from '@utils/envConfig'
-import path from 'path'
+import { PageCommon } from "@pages/page-common";
+import { Page } from "@playwright/test";
+import { envConfig } from "@utils/envConfig";
 
 export class SwitchOfficePage extends PageCommon {
   public page: Page
