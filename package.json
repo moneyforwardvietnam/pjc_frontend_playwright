@@ -7,10 +7,10 @@
   "license": "MIT",
   "scripts": {
     "preinstall": "npx playwright install",
-    "test": "npx playwright test",
-    "test:ui": "npx playwright test --ui",
-    "report": "npx playwright show-report",
-    "codegen": "npx playwright codegen https://project-cost.mfvn.dev/login"
+    "test": "yarn playwright test",
+    "test:ui": "yarn playwright test --ui",
+    "report": "yarn playwright show-report",
+    "codegen": "yarn playwright codegen https://project-cost.mfvn.dev/login"
   },
   "devDependencies": {
     "@playwright/test": "^1.39.0",
