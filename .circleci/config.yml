@@ -1,5 +1,3 @@
-version: 2.1
-
 aliases:
   - &cache_save
     save_cache:
@@ -16,6 +14,18 @@ aliases:
       name: Install Dependencies
       command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
 
+commands:
+  custom-command:
+    parameters:
+      run-command:
+        type: string
+        default: yarn test
+#        default: yarn test:health-check
+    steps:
+      - run:
+          name: Run Test
+          command: << parameters.run-command >>
+
 jobs:
   run-test:
     docker:
@@ -23,20 +33,40 @@ jobs:
     parallelism: 4
     environment:
       NODE_ENV: development
+    parameters:
+      command-name:
+        type: string
+        default: yarn test
     steps:
       - checkout
       - *cache_restore
       - *install_dependencies
       - *cache_save
-      - run:
-          name: Run Test 
-          command: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; yarn test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+      - custom-command:
+          run-command: << parameters.command-name >>
       - store_test_results:
           path: ./reports
       - store_artifacts:
           path: ./reports
 
+version: 2.1
 workflows:
   run-e2e-test:
     jobs:
-      - run-test
+      - run-test:
+          command-name: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; yarn test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+          filters:
+            branches:
+              only:
+                - develop
+  run-health-check:
+    jobs:
+      - run-test:
+          command-name: yarn test:health-check
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - develop
