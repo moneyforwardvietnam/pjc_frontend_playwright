@@ -16,6 +16,7 @@ aliases:
 
 jobs:
   run-test:
+    parallelism: 4
     docker:
       - image: mcr.microsoft.com/playwright:latest
     environment:
