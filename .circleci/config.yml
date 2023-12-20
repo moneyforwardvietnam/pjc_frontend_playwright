@@ -16,9 +16,9 @@ aliases:
 
 jobs:
   run-test:
-    parallelism: 4
     docker:
-      - image: mcr.microsoft.com/playwright:latest
+      - image: mcr.microsoft.com/playwright:v1.40.0-jammy
+    parallelism: 4
     environment:
       NODE_ENV: development
     steps:
@@ -26,7 +26,7 @@ jobs:
       - *cache_restore
       - *install_dependencies
       - *cache_save
-      - run: yarn test
+      - run: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; yarn test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
 
 workflows:
   run-e2e-test:
