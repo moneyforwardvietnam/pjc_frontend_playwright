@@ -28,15 +28,18 @@ commands:
 
 jobs:
   run-test:
-    docker:
-      - image: mcr.microsoft.com/playwright:v1.40.0-jammy
-    parallelism: 4
-    environment:
-      NODE_ENV: development
     parameters:
       command-name:
         type: string
         default: yarn test
+      parallelism:
+        type: integer
+        default: 4
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.40.0-jammy
+    parallelism: << parameters.parallelism >>
+    environment:
+      NODE_ENV: development
     steps:
       - checkout
       - *cache_restore
@@ -63,11 +66,8 @@ workflows:
     jobs:
       - run-test:
           command-name: yarn test:health-check
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
+          parallelism: 1
           filters:
             branches:
               only:
-                - develop
                 - health-check

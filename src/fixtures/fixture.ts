@@ -52,7 +52,7 @@ export const test = baseTest.extend<{}, { authentication?: {
   authentication: [{email: '', officeName: ''}, {option: true, scope: "worker"}],
 
   context: async ({authentication, environment, browser}, use, testInfo) => {
-    if (!authentication) return
+    if (!authentication) return use(await browser.newContext({baseURL: baseUrls[environment]}));
 
     const md5 = require('crypto').createHash('md5').update(authentication.email + authentication.officeName).digest('hex')
     const fileName = path.resolve(`src/.auth/user-${md5}.json`)
