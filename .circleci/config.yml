@@ -29,9 +29,6 @@ jobs:
       - *install_dependencies
       - *cache_save
       - run:
-          name: Install Playwright Browsers
-          command: yarn playwright install --with-deps
-      - run:
           name: Run Test 
           command: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; yarn test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
       - store_test_results:
