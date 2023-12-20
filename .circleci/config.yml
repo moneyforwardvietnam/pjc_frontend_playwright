@@ -1,0 +1,42 @@
+version: 2.1
+
+aliases:
+  - &cache_save
+    save_cache:
+      paths:
+        - ~/.cache/yarn
+        - node_modules
+      key: v1-dependencies-{{ checksum "yarn.lock" }}
+  - &cache_restore
+    restore_cache:
+      keys:
+        - v1-dependencies-{{ checksum "yarn.lock" }}
+  - &install_dependencies
+    run: 
+      name: Install Dependencies
+      command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+
+jobs:
+  run-test:
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.40.0-jammy
+    parallelism: 4
+    environment:
+      NODE_ENV: development
+    steps:
+      - checkout
+      - *cache_restore
+      - *install_dependencies
+      - *cache_save
+      - run:
+          name: Run Test 
+          command: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; yarn test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
+      - store_test_results:
+          path: ./reports
+      - store_artifacts:
+          path: ./reports
+
+workflows:
+  run-e2e-test:
+    jobs:
+      - run-test
