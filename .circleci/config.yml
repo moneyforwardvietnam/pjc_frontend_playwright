@@ -12,7 +12,9 @@ aliases:
       keys:
         - v1-dependencies-{{ checksum "yarn.lock" }}
   - &install_dependencies
-    run: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+    run: 
+      name: Install Dependencies
+      command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
 
 jobs:
   run-test:
