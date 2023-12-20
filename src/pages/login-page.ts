@@ -7,6 +7,7 @@ export class LoginPage extends PageCommon {
   private readonly emailInput: Locator
   private readonly passwordInput: Locator
   private signInButton: Locator
+  skipPasskeyButton: Locator
 
   constructor(page: Page) {
     super(page)
@@ -14,6 +15,7 @@ export class LoginPage extends PageCommon {
     this.emailInput = page.getByPlaceholder('example@moneyforward.com')
     this.passwordInput = page.getByLabel('パスワード', { exact: true })
     this.signInButton = page.getByRole('button', { name: 'ログインする', exact: true })
+    this.skipPasskeyButton = page.getByRole('link', { name: 'スキップする' })
   }
 
   async goto() {
@@ -22,22 +24,20 @@ export class LoginPage extends PageCommon {
 
   async login(email: string, password: string) {
     await this.goto()
-    await this.clickLocatorByTestId('login-button')
-    const availableAccountButton = this.page.getByText('Use other accounts')
-    if ((await availableAccountButton.count()) > 0) {
-      await availableAccountButton.click()
-    }
+    await this.page.getByRole('button', { name: 'マネーフォワードIDでログインして続行' }).click()
     await this.emailInput.click()
     await this.emailInput.fill(email)
     await this.signInButton.click()
     await this.passwordInput.fill(password)
     await this.signInButton.click()
-    const btnSkip = this.page.getByText('No thanks')
-    if ((await btnSkip.count()) > 0) {
-      await btnSkip.click()
+
+    const skipPasskeyButton = this.page.getByRole('link', { name: 'スキップする' })
+
+    const count = await skipPasskeyButton.count()
+    if (count > 0) {
+      await skipPasskeyButton.click()
     }
 
-    console.log('this.expectUrlAfterLogin', this.expectUrlAfterLogin);
     await this.page.waitForURL(this.expectUrlAfterLogin, {waitUntil: 'domcontentloaded'})
   }
 }

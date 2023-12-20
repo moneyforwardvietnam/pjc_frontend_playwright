@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test'
+import { Locator, Page } from '@fixtures/fixture'
 
 export class PageCommon {
   protected readonly page: Page

@@ -1,7 +1,8 @@
-import { accountsByEmail } from "@data/accounts";
+import { accountsByEmail, prodAccountsByEmail } from "@data/accounts";
 import { LoginPage } from '@pages/login-page'
 import { SwitchOfficePage } from '@pages/offices/switch-office-page'
 import { test as baseTest } from '@playwright/test'
+import { baseUrls, ISupportedEnvironment } from "@utils/envConfig";
 import fs from 'fs'
 import path from 'path'
 export * from '@playwright/test'
@@ -44,10 +45,13 @@ function waitUntilFileExists(fileName: string, {timeout = 30_000}: {timeout?: nu
 export const test = baseTest.extend<{}, { authentication?: {
     email: string,
     officeName: string,
-  }}>({
+  }, environment: ISupportedEnvironment
+}>({
+  environment: ['staging', {scope: "worker"}],
+
   authentication: [{email: '', officeName: ''}, {option: true, scope: "worker"}],
 
-  context: async ({authentication, browser}, use, testInfo) => {
+  context: async ({authentication, environment, browser}, use, testInfo) => {
     if (!authentication) return
 
     const md5 = require('crypto').createHash('md5').update(authentication.email + authentication.officeName).digest('hex')
@@ -59,16 +63,20 @@ export const test = baseTest.extend<{}, { authentication?: {
     const fileExists = await waitUntilFileExists(fileName)
 
     if (fileExists) {
-      const context = await browser.newContext({storageState: fileName})
+      const context = await browser.newContext({storageState: fileName, baseURL: baseUrls[environment]})
       return use(context)
     }
 
     fs.writeFileSync(fileName + '.tmp', '')
 
-    const page = await browser.newPage({ locale: 'ja', storageState: undefined })
+    const page = await browser.newPage({ locale: 'ja', storageState: undefined, baseURL: baseUrls[environment] })
     const pageLogin = new LoginPage(page)
 
-    await pageLogin.login(authentication.email, accountsByEmail[authentication.email].password)
+    const password = environment === 'production'
+      ? prodAccountsByEmail[authentication.email].password
+      : accountsByEmail[authentication.email].password
+
+    await pageLogin.login(authentication.email, password)
     const switchOfficePage = new SwitchOfficePage(page)
     await switchOfficePage.switchOffice(authentication.officeName)
     const context = page.context()

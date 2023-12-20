@@ -1,3 +1,5 @@
+import { ISupportedEnvironment } from "@utils/envConfig";
+
 /**
  * @deprecated - use accountsByEmail instead
  */
@@ -61,7 +63,12 @@ export const accounts = {
   },
 }
 
-export const accountsByEmail = {
+export type IAccount = {
+  email: string,
+  password: string,
+}
+
+export const accountsByEmail: Record<string, IAccount> = {
   "nguyen.thi.ngoc+qa1@moneyforward.vn": {
     "email": "nguyen.thi.ngoc+qa1@moneyforward.vn",
     "password": "Qatest-001"
@@ -121,5 +128,12 @@ export const accountsByEmail = {
   "nguyen.thi.thu+306@moneyforward.vn": {
     "email": "nguyen.thi.thu+306@moneyforward.vn",
     "password": "123456aA@"
+  }
+}
+
+export const prodAccountsByEmail: Record<string, IAccount> = {
+  "nguyen.thi.ngoc+p1@moneyforward.vn": {
+    email: "nguyen.thi.ngoc+p1@moneyforward.vn",
+    password: "QATest123456"
   }
 }
