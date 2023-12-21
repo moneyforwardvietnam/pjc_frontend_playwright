@@ -52,7 +52,9 @@ export const test = baseTest.extend<{}, { authentication?: {
   authentication: [{email: '', officeName: ''}, {option: true, scope: "worker"}],
 
   context: async ({authentication, environment, browser}, use, testInfo) => {
-    if (!authentication) return use(await browser.newContext({baseURL: baseUrls[environment]}));
+    const baseURL = baseUrls[environment]
+
+    if (!authentication) return use(await browser.newContext({baseURL}));
 
     const md5 = require('crypto').createHash('md5').update(authentication.email + authentication.officeName).digest('hex')
     const fileName = path.resolve(`src/.auth/user-${md5}.json`)
@@ -63,14 +65,14 @@ export const test = baseTest.extend<{}, { authentication?: {
     const fileExists = await waitUntilFileExists(fileName)
 
     if (fileExists) {
-      const context = await browser.newContext({storageState: fileName, baseURL: baseUrls[environment]})
+      const context = await browser.newContext({storageState: fileName, baseURL})
       return use(context)
     }
 
     fs.writeFileSync(fileName + '.tmp', '')
 
-    const page = await browser.newPage({ locale: 'ja', storageState: undefined, baseURL: baseUrls[environment] })
-    const pageLogin = new LoginPage(page)
+    const page = await browser.newPage({ locale: 'ja', storageState: undefined, baseURL })
+    const pageLogin = new LoginPage(page, { environment })
 
     const password = environment === 'production'
       ? prodAccountsByEmail[authentication.email].password
@@ -83,7 +85,7 @@ export const test = baseTest.extend<{}, { authentication?: {
     await context.storageState({ path: fileName })
     await page.close()
 
-    const browserContext = await browser.newContext({storageState: fileName})
+    const browserContext = await browser.newContext({storageState: fileName, baseURL})
 
     try {fs.unlinkSync(fileName + '.tmp')} catch (e) {}
     return use(browserContext)

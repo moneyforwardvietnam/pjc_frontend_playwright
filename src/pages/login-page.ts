@@ -1,5 +1,6 @@
 import { PageCommon } from '@pages/page-common'
 import { Locator, Page } from '@playwright/test'
+import { ISupportedEnvironment } from "@utils/envConfig";
 
 export class LoginPage extends PageCommon {
   public loginUrl: string
@@ -7,15 +8,18 @@ export class LoginPage extends PageCommon {
   private readonly emailInput: Locator
   private readonly passwordInput: Locator
   private signInButton: Locator
-  skipPasskeyButton: Locator
+  environment: ISupportedEnvironment
 
-  constructor(page: Page) {
+  /**
+   * Because Navis in PROD is using Japanese, but in STG is using English, so we need to add environment
+   */
+  constructor(page: Page, options?: { environment: ISupportedEnvironment }) {
     super(page)
+    this.environment = options?.environment || 'staging'
     this.loginUrl = '/login'
     this.emailInput = page.getByPlaceholder('example@moneyforward.com')
-    this.passwordInput = page.getByLabel('パスワード', { exact: true })
-    this.signInButton = page.getByRole('button', { name: 'ログインする', exact: true })
-    this.skipPasskeyButton = page.getByRole('link', { name: 'スキップする' })
+    this.passwordInput = this.environment === 'staging' ? page.getByLabel('Password', { exact: true }) : page.getByLabel('パスワード', { exact: true })
+    this.signInButton = this.environment === 'staging' ? page.getByRole('button', { name: 'Sign in' }) : page.getByRole('button', { name: 'ログインする', exact: true })
   }
 
   async goto() {
