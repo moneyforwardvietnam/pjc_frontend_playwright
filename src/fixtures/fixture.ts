@@ -42,6 +42,7 @@ function waitUntilFileExists(fileName: string, {timeout = 30_000}: {timeout?: nu
   })
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export const test = baseTest.extend<{}, { authentication?: {
     email: string,
     officeName: string,
@@ -56,6 +57,7 @@ export const test = baseTest.extend<{}, { authentication?: {
 
     if (!authentication) return use(await browser.newContext({baseURL}));
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const md5 = require('crypto').createHash('md5').update(authentication.email + authentication.officeName).digest('hex')
     const fileName = path.resolve(`src/.auth/user-${md5}.json`)
 
@@ -87,7 +89,7 @@ export const test = baseTest.extend<{}, { authentication?: {
 
     const browserContext = await browser.newContext({storageState: fileName, baseURL})
 
-    try {fs.unlinkSync(fileName + '.tmp')} catch (e) {}
+    try {fs.unlinkSync(fileName + '.tmp')} catch (e) { /* empty */ }
     return use(browserContext)
   }
 })
