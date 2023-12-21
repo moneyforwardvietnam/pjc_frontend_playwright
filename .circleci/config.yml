@@ -35,6 +35,7 @@ jobs:
       parallelism:
         type: integer
         default: 4
+    circleci_ip_ranges: true # opts the job into the IP ranges feature
     docker:
       - image: mcr.microsoft.com/playwright:v1.40.0-jammy
     parallelism: << parameters.parallelism >>
