@@ -23,18 +23,18 @@ test.use({
 })
 
 test('C65726 Project List - Verify the display of the Projects list', async ({ page }) => {
-  const projectPage = new ProjectsPage(page)
-  await projectPage.goto()
-  await projectPage.waitUntilProjectsLoaded()
+  const projectsPage = new ProjectsPage(page)
+  await projectsPage.goto()
+  await projectsPage.waitUntilProjectsLoaded()
 
-  await expect(projectPage.title).toHaveText('プロジェクト')
-  await expect(projectPage.reloadButton).toBeVisible()
-  await expect(projectPage.exportButton).toBeVisible()
-  await expect(projectPage.importButton).toBeVisible()
-  await expect(projectPage.createButton).toBeVisible()
-  await expect(projectPage.datePicker).toBeVisible()
-  await expect(projectPage.searchBox).toBeVisible()
-  const tableHeads = projectPage.tableHeads
+  await expect(projectsPage.title).toHaveText('プロジェクト')
+  await expect(projectsPage.reloadButton).toBeVisible()
+  await expect(projectsPage.exportButton).toBeVisible()
+  await expect(projectsPage.importButton).toBeVisible()
+  await expect(projectsPage.createButton).toBeVisible()
+  await expect(projectsPage.datePicker).toBeVisible()
+  await expect(projectsPage.searchBox).toBeVisible()
+  const tableHeads = projectsPage.tableHeads
   for (const key in tableHeads) {
     await expect(tableHeads[key]).toBeVisible()
   }

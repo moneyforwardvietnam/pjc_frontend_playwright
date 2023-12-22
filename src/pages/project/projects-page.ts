@@ -43,11 +43,24 @@ export class ProjectsPage extends PageCommon {
     }
   }
 
-  goto() {
-    return this.page.goto('/')
+  goto(query?: string) {
+    return this.page.goto(query ? `/?${query}` : `/`)
   }
 
   waitUntilProjectsLoaded() {
     return this.page.waitForResponse('**/api/v1/project_master/projects**')
+  }
+
+  async search(text: string) {
+    await this.searchBox.fill(text)
+    await this.searchBox.press('Enter')
+    await this.waitUntilProjectsLoaded()
+  }
+
+  async setDate(date: string) {
+    await this.datePicker.click()
+    await this.datePicker.fill(date)
+    await this.datePicker.press('Enter')
+    await this.waitUntilProjectsLoaded()
   }
 }
