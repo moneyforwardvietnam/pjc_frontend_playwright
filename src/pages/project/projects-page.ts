@@ -1,5 +1,12 @@
 import { PageCommon } from "@pages/page-common";
 
+interface NewProjectProps {
+  name: string
+  code: string
+  startDate: string
+  endDate?: string
+  department: string
+}
 export class ProjectsPage extends PageCommon {
 
   get title() {
@@ -51,6 +58,12 @@ export class ProjectsPage extends PageCommon {
     return this.page.waitForResponse('**/api/v1/project_master/projects**')
   }
 
+  waitForAddNewProject() {
+    return this.page.waitForResponse((response) => {
+      return response.url().includes('/api/v1/project_master/projects') && response.request().method() === 'POST'
+    })
+  }
+
   async search(text: string) {
     await this.searchBox.fill(text)
     await this.searchBox.press('Enter')
@@ -62,5 +75,31 @@ export class ProjectsPage extends PageCommon {
     await this.datePicker.fill(date)
     await this.datePicker.press('Enter')
     await this.waitUntilProjectsLoaded()
+  }
+
+  async addNewProject(newProject: NewProjectProps) {
+    const projectName = await this.page.locator('[name="name"]')
+    await projectName.fill(newProject.name)
+    const projectCode = await this.page.locator('[name="code"]')
+    await projectCode.fill(newProject.code)
+    
+    const startDate = await this.page.locator('[name="valid_from"]')
+    await this.chooseDate(startDate, newProject.startDate)
+    
+    const departmentWrapper = await this.page.locator('.form-item:has-text("部門")')
+    await departmentWrapper.getByRole('combobox').click()
+    await this.page.getByTitle(newProject.department).click()
+    await this.page.locator('body').click()
+
+    if (newProject.endDate) {
+      const endDate = await this.page.locator('[name="valid_to"]')
+      await this.chooseDate(endDate, newProject.endDate)
+    }
+
+    await this.page.getByRole('button', { name: '作成', exact: true }).click()
+  }
+
+  deleteProjectByBiid(biid: string) {
+    return this.page.request.delete(`/api/v1/project_master/projects/${biid}`)
   }
 }
