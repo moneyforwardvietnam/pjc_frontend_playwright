@@ -61,8 +61,8 @@ workflows:
           command-name: SHARD="$((${CIRCLE_NODE_INDEX}+1))"; yarn test -- --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
           filters:
             branches:
-              ignore:
-                - health-check
+              only:
+                - develop
                 
   run-health-check:
     jobs:
