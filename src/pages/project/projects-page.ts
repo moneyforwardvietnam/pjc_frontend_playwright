@@ -99,7 +99,14 @@ export class ProjectsPage extends PageCommon {
     await this.page.getByRole('button', { name: '作成', exact: true }).click()
   }
 
-  deleteProjectByBiid(biid: string) {
-    return this.page.request.delete(`/api/v1/project_master/projects/${biid}`)
+  async deleteProjectByBiid(biid: string) {
+    // eslint-disable-next-line no-undef
+    const csrfToken = await this.page.evaluate(() => localStorage.getItem('csrfToken'))
+    return this.page.request.delete(`/api/v1/project_master/projects/${biid}`, {
+      headers: {
+        'X-CSRF-Token': csrfToken,
+        'Access-Control-Allow-Origin': '*',
+      }
+    })
   }
 }
