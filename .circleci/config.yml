@@ -63,7 +63,6 @@ workflows:
             branches:
               only:
                 - develop
-                
   run-health-check:
     jobs:
       - run-test:
