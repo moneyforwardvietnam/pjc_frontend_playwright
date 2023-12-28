@@ -23,9 +23,9 @@ export class LoginPage extends PageCommon {
     await this.emailInput.click()
     await this.emailInput.fill(email)
 
-    await (await this.page.$('#submitto')).click()
-    await (await this.page.$('input[type="password"]')).fill(password)
-    await (await this.page.$('#submitto')).click()
+    await (await this.page.locator('#submitto')).click()
+    await (await this.page.locator('input[type="password"]')).fill(password)
+    await (await this.page.locator('#submitto')).click()
 
     const skipPasskeyButton = this.page.getByRole('link', { name: 'スキップする' })
 
