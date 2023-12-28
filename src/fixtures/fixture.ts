@@ -74,7 +74,7 @@ export const test = baseTest.extend<{}, { authentication?: {
     fs.writeFileSync(fileName + '.tmp', '')
 
     const page = await browser.newPage({ locale: 'ja', storageState: undefined, baseURL })
-    const pageLogin = new LoginPage(page, { environment })
+    const pageLogin = new LoginPage(page)
 
     const password = environment === 'production'
       ? prodAccountsByEmail[authentication.email].password
