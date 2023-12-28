@@ -4,7 +4,7 @@ import { envConfig } from '@utils/envConfig'
 import { loginFlow } from '../../src/flows/login'
 
 test('C24036 Login again after logging out', async ({ page }) => {
-  await loginFlow(page, accountsByEmail['nguyen.thi.ngoc+qa1@moneyforward.vn'].email)
+  await loginFlow(page, accountsByEmail['nguyen.thi.ngoc+qa1@moneyforward.vn'])
   await expect(page.url()).toBe(`${envConfig.baseUrl}`)
   await page.getByTestId('office-user-name-button').click()
   await page.getByRole('menuitem', { name: 'ログアウト' }).click()
