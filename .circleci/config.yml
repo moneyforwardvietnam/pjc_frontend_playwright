@@ -50,7 +50,7 @@ jobs:
       - store_test_results:
           path: results.xml
       - store_artifacts:
-          path: results.xml
+          path: playwright-report
 
 version: 2.1
 workflows:
