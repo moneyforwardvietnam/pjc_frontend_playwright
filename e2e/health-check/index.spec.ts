@@ -1,6 +1,6 @@
 import { prodAccountsByEmail } from "@data/accounts";
 import { expect, test } from "@fixtures/fixture";
-import { ProjectPage } from "@pages/project/project-page";
+import { ProjectsPage } from "@pages/project/projects-page";
 
 
 test.use({
@@ -11,7 +11,7 @@ test.use({
 });
 
 test("Can login and see project page", async ({ page }) => {
-  const projectPage = new ProjectPage(page);
+  const projectPage = new ProjectsPage(page);
   await projectPage.goto();
 
   await projectPage.waitUntilProjectsLoaded()

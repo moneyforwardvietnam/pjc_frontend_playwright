@@ -49,9 +49,9 @@ jobs:
       - custom-command:
           run-command: << parameters.command-name >>
       - store_test_results:
-          path: ./reports
+          path: results.xml
       - store_artifacts:
-          path: ./reports
+          path: playwright-report
 
 version: 2.1
 workflows:
