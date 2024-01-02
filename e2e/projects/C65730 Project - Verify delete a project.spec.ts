@@ -38,8 +38,8 @@ test('C65730 Project - Verify delete a project', async ({ page }) => {
 
   await projectsPage.createButton.click()
   await projectsPage.addNewProject({
-    name: 'New Project Test - ' + Date.now(),
-    code: 'new-project-test-to-delete',
+    name: 'New Project Test To Delete',
+    code: 'new-project-test-' + Date.now(),
     startDate: '2023/01/01',
     department: 'Dept 1',
   })
@@ -55,12 +55,14 @@ test('C65730 Project - Verify delete a project', async ({ page }) => {
 
   // Verify the dialog
   expect(await page.getByRole('dialog').getByText('プロジェクトを削除しますか？')).toBeVisible()
-  expect(await page.getByRole('dialog').getByText('削除すると、このプロジェクトが破棄されます。この操作は取り消せません')).toBeVisible()
-  expect(await page.getByRole('dialog').getByRole('button', {name: 'キャンセル'})).toBeVisible()
-  expect(await page.getByRole('dialog').getByRole('button', {name: '削除'})).toBeVisible()
+  expect(
+    await page.getByRole('dialog').getByText('削除すると、このプロジェクトが破棄されます。この操作は取り消せません')
+  ).toBeVisible()
+  expect(await page.getByRole('dialog').getByRole('button', { name: 'キャンセル' })).toBeVisible()
+  expect(await page.getByRole('dialog').getByRole('button', { name: '削除' })).toBeVisible()
 
   // Delete the project
-  await page.getByRole('dialog').getByRole('button', {name: '削除'}).click()
+  await page.getByRole('dialog').getByRole('button', { name: '削除' }).click()
   await projectPage.waitForProjectDeleted()
   await expect(page.getByText('プロジェクトを削除しました。')).toBeVisible()
 })

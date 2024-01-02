@@ -30,8 +30,8 @@ test('C65728 Project - Verify create a new project', async ({ page }) => {
 
   await projectsPage.createButton.click()
   await projectsPage.addNewProject({
-    name: 'New Project Test - ' + Date.now(),
-    code: 'new-project-test',
+    name: 'New Project Test',
+    code: 'new-project-test-' + Date.now(),
     startDate: '2023/01/01',
     department: 'Dept 1',
   })
