@@ -24,8 +24,8 @@ Expected Result:
 
 test.use({
   authentication: {
-    email: accountsByEmail['nguyen.thi.thu+82@moneyforward.vn'].email,
-    officeName: 'E2E Office',
+    email: accountsByEmail['nguyen.thi.thu+86@moneyforward.vn'].email,
+    officeName: 'Hannah office 86',
   },
 })
 
@@ -36,7 +36,7 @@ test('C65730 Project - Verify delete a project', async ({ page }) => {
   await projectsPage.goto('valid_at=all')
   await projectsPage.waitUntilProjectsLoaded()
 
-  await projectsPage.createButton.click()
+  await projectsPage.createButton.first().click()
   await projectsPage.addNewProject({
     name: 'New Project Test To Delete',
     code: 'new-project-test-' + Date.now(),
