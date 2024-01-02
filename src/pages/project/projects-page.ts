@@ -109,4 +109,8 @@ export class ProjectsPage extends PageCommon {
       }
     })
   }
+
+  selectProjectByName(name: string, exact = true) {
+    return this.page.getByText(name, exact ? {exact} : null).click()
+  }
 }

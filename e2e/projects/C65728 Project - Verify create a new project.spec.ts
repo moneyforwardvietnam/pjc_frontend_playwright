@@ -25,7 +25,7 @@ test.use({
 
 test('C65728 Project - Verify create a new project', async ({ page }) => {
   const projectsPage = new ProjectsPage(page)
-  await projectsPage.goto('?valid_at=all')
+  await projectsPage.goto('valid_at=all')
   await projectsPage.waitUntilProjectsLoaded()
 
   await projectsPage.createButton.click()
