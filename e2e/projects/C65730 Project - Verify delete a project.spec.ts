@@ -39,7 +39,7 @@ test('C65730 Project - Verify delete a project', async ({ page }) => {
   await projectsPage.createButton.click()
   await projectsPage.addNewProject({
     name: 'New Project Test - ' + Date.now(),
-    code: 'new-project-test',
+    code: 'new-project-test-to-delete',
     startDate: '2023/01/01',
     department: 'Dept 1',
   })
