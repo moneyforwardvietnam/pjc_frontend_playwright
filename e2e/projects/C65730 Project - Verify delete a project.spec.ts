@@ -51,6 +51,7 @@ test('C65730 Project - Verify delete a project', async ({ page }) => {
   await expect(page.getByText('プロジェクトを作成しました。')).toBeVisible()
 
   await projectPage.goto(newProject.biid)
+  await projectPage.waitForProjectLoaded()
   await projectPage.deleteButton.click()
 
   // Verify the dialog
