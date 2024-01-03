@@ -18,8 +18,8 @@ Expected Result:
 
 test.use({
   authentication: {
-    email: accountsByEmail['nguyen.thi.thu+82@moneyforward.vn'].email,
-    officeName: 'E2E Office',
+    email: accountsByEmail['nguyen.thi.thu+51@moneyforward.vn'].email,
+    officeName: 'Hannah office 123',
   },
 })
 
@@ -33,7 +33,7 @@ test('C65728 Project - Verify create a new project', async ({ page }) => {
     name: 'New Project Test',
     code: 'new-project-test-' + Date.now(),
     startDate: '2023/01/01',
-    department: 'Dept 1',
+    department: 'dep 1',
   })
 
   const addNewResponse = await projectsPage.waitForAddNewProject()

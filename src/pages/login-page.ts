@@ -27,13 +27,13 @@ export class LoginPage extends PageCommon {
     await (await this.page.locator('input[type="password"]')).fill(password)
     await (await this.page.locator('#submitto')).click()
 
-    const skipPasskeyButton = this.page.getByRole('link', { name: 'スキップする' })
-
-    const count = await skipPasskeyButton.count()
-    if (count > 0) {
-      await skipPasskeyButton.click()
+    try {
+      await this.page.waitForURL('**/passkey_promotion**', { timeout: 10000 })
+      await this.page.getByRole('link', { name: 'スキップする' }).click()
+    } catch (e) {
+      // ignore: there is no skip button
     }
 
-    await this.page.waitForURL(this.expectUrlAfterLogin, {waitUntil: 'domcontentloaded'})
+    await this.page.waitForURL(this.expectUrlAfterLogin, { waitUntil: 'domcontentloaded' })
   }
 }
