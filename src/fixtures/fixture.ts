@@ -42,6 +42,7 @@ function waitUntilFileExists(fileName: string, {timeout = 30_000}: {timeout?: nu
   })
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export const test = baseTest.extend<{}, { authentication?: {
     email: string,
     officeName: string,
@@ -52,8 +53,11 @@ export const test = baseTest.extend<{}, { authentication?: {
   authentication: [{email: '', officeName: ''}, {option: true, scope: "worker"}],
 
   context: async ({authentication, environment, browser}, use, testInfo) => {
-    if (!authentication) return
+    const baseURL = baseUrls[environment]
 
+    if (!authentication) return use(await browser.newContext({baseURL}));
+
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const md5 = require('crypto').createHash('md5').update(authentication.email + authentication.officeName).digest('hex')
     const fileName = path.resolve(`src/.auth/user-${md5}.json`)
 
@@ -63,13 +67,13 @@ export const test = baseTest.extend<{}, { authentication?: {
     const fileExists = await waitUntilFileExists(fileName)
 
     if (fileExists) {
-      const context = await browser.newContext({storageState: fileName, baseURL: baseUrls[environment]})
+      const context = await browser.newContext({storageState: fileName, baseURL})
       return use(context)
     }
 
     fs.writeFileSync(fileName + '.tmp', '')
 
-    const page = await browser.newPage({ locale: 'ja', storageState: undefined, baseURL: baseUrls[environment] })
+    const page = await browser.newPage({ locale: 'ja', storageState: undefined, baseURL })
     const pageLogin = new LoginPage(page)
 
     const password = environment === 'production'
@@ -83,9 +87,9 @@ export const test = baseTest.extend<{}, { authentication?: {
     await context.storageState({ path: fileName })
     await page.close()
 
-    const browserContext = await browser.newContext({storageState: fileName})
+    const browserContext = await browser.newContext({storageState: fileName, baseURL})
 
-    try {fs.unlinkSync(fileName + '.tmp')} catch (e) {}
+    try {fs.unlinkSync(fileName + '.tmp')} catch (e) { /* empty */ }
     return use(browserContext)
   }
 })

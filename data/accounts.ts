@@ -1,5 +1,3 @@
-import { ISupportedEnvironment } from "@utils/envConfig";
-
 /**
  * @deprecated - use accountsByEmail instead
  */

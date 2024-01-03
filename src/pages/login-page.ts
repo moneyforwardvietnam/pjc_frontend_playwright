@@ -3,19 +3,13 @@ import { Locator, Page } from '@playwright/test'
 
 export class LoginPage extends PageCommon {
   public loginUrl: string
-  public expectUrlAfterLogin: string = '/'
+  public expectUrlAfterLogin = '/'
   private readonly emailInput: Locator
-  private readonly passwordInput: Locator
-  private signInButton: Locator
-  skipPasskeyButton: Locator
 
   constructor(page: Page) {
     super(page)
     this.loginUrl = '/login'
     this.emailInput = page.getByPlaceholder('example@moneyforward.com')
-    this.passwordInput = page.getByLabel('パスワード', { exact: true })
-    this.signInButton = page.getByRole('button', { name: 'ログインする', exact: true })
-    this.skipPasskeyButton = page.getByRole('link', { name: 'スキップする' })
   }
 
   async goto() {
@@ -25,19 +19,21 @@ export class LoginPage extends PageCommon {
   async login(email: string, password: string) {
     await this.goto()
     await this.page.getByRole('button', { name: 'マネーフォワードIDでログインして続行' }).click()
+
     await this.emailInput.click()
     await this.emailInput.fill(email)
-    await this.signInButton.click()
-    await this.passwordInput.fill(password)
-    await this.signInButton.click()
 
-    const skipPasskeyButton = this.page.getByRole('link', { name: 'スキップする' })
+    await (await this.page.locator('#submitto')).click()
+    await (await this.page.locator('input[type="password"]')).fill(password)
+    await (await this.page.locator('#submitto')).click()
 
-    const count = await skipPasskeyButton.count()
-    if (count > 0) {
-      await skipPasskeyButton.click()
+    try {
+      await this.page.waitForURL('**/passkey_promotion**', { timeout: 10000 })
+      await this.page.getByRole('link', { name: 'スキップする' }).click()
+    } catch (e) {
+      // ignore: there is no skip button
     }
 
-    await this.page.waitForURL(this.expectUrlAfterLogin, {waitUntil: 'domcontentloaded'})
+    await this.page.waitForURL(this.expectUrlAfterLogin, { waitUntil: 'domcontentloaded' })
   }
 }
