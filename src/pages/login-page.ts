@@ -28,7 +28,7 @@ export class LoginPage extends PageCommon {
     await (await this.page.locator('#submitto')).click()
 
     try {
-      await this.page.waitForURL('**/passkey_promotion**', { timeout: 10000 })
+      await this.page.waitForURL('**/passkey_promotion**', { timeout: 5000 })
       await this.page.getByRole('link', { name: 'スキップする' }).click()
     } catch (e) {
       // ignore: there is no skip button
