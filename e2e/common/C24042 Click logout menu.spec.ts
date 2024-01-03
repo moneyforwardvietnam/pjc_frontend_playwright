@@ -1,13 +1,22 @@
-import { accounts } from '@data/accounts'
-import { expect, test } from '@playwright/test'
+import { accountsByEmail } from '@data/accounts'
+import { test } from '@fixtures/fixture'
+import { ProjectPage } from '@pages/project/project-page'
+import { ProjectsPage } from '@pages/project/projects-page'
+import { expect } from '@playwright/test'
 import { envConfig } from '@utils/envConfig'
-import { loginFlow } from '../../src/flows/login'
+
+test.use({
+  authentication: {
+    email: accountsByEmail['vu.xuan.khiem+6@moneyforward.vn'].email,
+    officeName: 'W data PdM 20',
+  },
+})
 
 test('C24895 Click logout menu', async ({ page }) => {
-  await loginFlow(page, accounts.DEFAULT)
-  await expect(page.url()).toBe(`${envConfig.baseUrl}`)
+  const projectsPage = new ProjectsPage(page)
+  await projectsPage.goto()
   await page.getByTestId('office-user-name-button').click()
   await page.getByRole('menuitem', { name: 'ログアウト' }).click()
   await page.waitForURL(`${envConfig.baseUrl}login`)
-  await expect(page.url()).toBe(`${envConfig.baseUrl}login`)
+  expect(page.url()).toBe(`${envConfig.baseUrl}login`)
 })
