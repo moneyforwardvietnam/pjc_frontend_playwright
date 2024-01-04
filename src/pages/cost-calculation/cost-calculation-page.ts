@@ -15,10 +15,10 @@ export class CostCalculationPage extends PageCommon {
   }
 
   async getCostResultData() {
-    const rows = this.page.locator('.ant-table-row-level-0')
+    const rows = this.page.locator('.eui-table-row-level-0')
     const resultData = []
     for (let i = 0; i < (await rows.count()); i++) {
-      const cellsOfRow = await rows.nth(i).locator('.ant-table-cell')
+      const cellsOfRow = await rows.nth(i).locator('.eui-table-cell')
       const projectName = await cellsOfRow.nth(0).textContent()
       const projectResult = await cellsOfRow.nth(5).textContent()
       resultData.push({ projectName, projectResult })

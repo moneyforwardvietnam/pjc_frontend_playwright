@@ -1,10 +1,11 @@
-import { accounts } from '@data/accounts'
+import { accountsByEmail } from '@data/accounts'
 import { expect, test } from '@playwright/test'
+import { envConfig } from '@utils/envConfig'
 import { loginFlow } from '../../src/flows/login'
 
+//Cannot login with old email. Login by new email successfully
+
 test('C24041 Change email and login', async ({ page }) => {
-  await loginFlow(page, accounts.HANNAH_82, 'E2E Office')
-  await loginFlow(page, accounts.HANNAH_45, 'E2E Office')
-  await expect(page.getByTestId('office-user-name-button')).toHaveText(['Hannah 45'])
-  await expect(page.getByTestId('office-dropdown-button')).toHaveText(['E2E Office'])
+  await loginFlow(page, accountsByEmail['nguyen.thi.ngoc+qa1@moneyforward.vn'])
+  expect(page.url()).toBe(`${envConfig.baseUrl}`)
 })

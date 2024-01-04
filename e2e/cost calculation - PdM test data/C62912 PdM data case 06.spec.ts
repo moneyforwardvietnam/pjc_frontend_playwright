@@ -1,7 +1,14 @@
-import { accounts } from '@data/accounts'
+import { accounts, accountsByEmail } from '@data/accounts'
+import { test } from '@fixtures/fixture'
 import { CostCalculationPage } from '@pages/cost-calculation/cost-calculation-page'
-import { expect, test } from '@playwright/test'
-import { loginFlow } from '../../src/flows/login'
+import { expect } from '@playwright/test'
+
+test.use({
+  authentication: {
+    email: accountsByEmail['vu.xuan.khiem+6@moneyforward.vn'].email,
+    officeName: 'W data PdM 06',
+  },
+})
 
 test('C62912 PdM data case 06', async ({ page }) => {
   const expectData = [
@@ -10,7 +17,6 @@ test('C62912 PdM data case 06', async ({ page }) => {
     { projectName: 'Project C', projectResult: '2,740,000' },
     { projectName: 'Project D', projectResult: '20,000' },
   ]
-  await loginFlow(page, accounts.WILLIAM_6, 'W data PdM 06')
   const costPage = new CostCalculationPage(page, '?valid_at=2023-01&tab=result')
   await costPage.goto()
   const tableResult = await costPage.getCostResultData()

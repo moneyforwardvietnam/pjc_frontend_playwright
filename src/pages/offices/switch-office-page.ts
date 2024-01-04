@@ -1,5 +1,5 @@
-import { type Page } from "@fixtures/fixture";
-import { PageCommon } from "@pages/page-common";
+import { expect, type Page } from '@fixtures/fixture'
+import { PageCommon } from '@pages/page-common'
 
 export class SwitchOfficePage extends PageCommon {
   page: Page
@@ -10,7 +10,7 @@ export class SwitchOfficePage extends PageCommon {
   }
 
   async goto() {
-    await this.page.goto('offices/switch', {waitUntil: 'networkidle'})
+    await this.page.goto('offices/switch', { waitUntil: 'networkidle' })
   }
 
   async switchOffice(officeName: string) {
@@ -20,9 +20,10 @@ export class SwitchOfficePage extends PageCommon {
 
     const selectOfficeButtonPromise = this.page
       .getByRole('row', { name: officeName })
+      .first()
       .getByRole('button', { name: '切替' })
 
-    const isDisabled = await selectOfficeButtonPromise.isDisabled( )
+    const isDisabled = await selectOfficeButtonPromise.isDisabled()
     if (isDisabled) {
       await this.page.goto('/')
       return
@@ -34,7 +35,7 @@ export class SwitchOfficePage extends PageCommon {
 
   async switchOfficeByOfficeId(officeId: string) {
     await this.goto()
-    const selectedButton = await this.page
+    const selectedButton = this.page
       .locator(`tbody.ant-table-tbody tr[data-row-key="${officeId}"]`)
       ?.getByRole('button', { name: '切替' })
     if (await selectedButton.isDisabled()) {
